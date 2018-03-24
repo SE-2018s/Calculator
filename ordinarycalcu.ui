@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>Caculator</class>
- <widget name="Caculator" class="QWidget">
+ <class>OrdinaryCalcu</class>
+ <widget class="QWidget" name="OrdinaryCalcu">
   <property name="geometry">
    <rect>
     <x>0</x>

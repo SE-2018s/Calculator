@@ -26,14 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    button.cpp \
-    calculator.cpp
+    abstractcalcu.cpp \
+    scientificcalcu.cpp \
+    ordinarycalcu.cpp \
+    programcalcu.cpp
 
 HEADERS += \
         mainwindow.h \
-    button.h \
-    calculator.h
+    abstractcalcu.h \
+    scientificcalcu.h \
+    ordinarycalcu.h \
+    programcalcu.h
 
 FORMS += \
         mainwindow.ui \
-    caculator.ui
+    scientificcalcu.ui \
+    ordinarycalcu.ui \
+    programcalcu.ui
