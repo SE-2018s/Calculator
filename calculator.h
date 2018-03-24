@@ -4,9 +4,8 @@
 #include <QWidget>
 #include <QtWidgets>
 #include "button.h"
-QT_BEGIN_NAMESPACE
-class QLineEdit;
-QT_END_NAMESPACE
+#include <QLineEdit>
+#include <QString>
 
 class Calculator : public QWidget
 {
@@ -22,9 +21,9 @@ private slots:
     void test();
 
 private:
-    Button *createButton(const QString &text, const char *member);
     QLineEdit *display;
     static const int NumDigitButtons = 10;
     Button *digitButtons[NumDigitButtons];
+    QString* output;
 };
 #endif
