@@ -1,5 +1,10 @@
 #include <memory>
 #include <cmath>
+
+using ptr = std::shared_ptr<T>;
+using syn_tree = std::shared_ptr<syntax_tree::syntax_node>;
+
+
 namespace syntax_tree{
 
 enum unary_op {
@@ -36,14 +41,14 @@ struct float_node : number_node {
   double value;
   virtual double calculate();
 };
-struct bin_op_node : syntax_node {
-  bin_op op;
-  std::shared_ptr<number_node> left, right;
-  virtual double calculate();
-};
 struct unary_op_node : syntax_node {
   unary_op op;
   std::shared_ptr<number_node> child;
+  virtual double calculate();
+};
+struct bin_op_node : syntax_node {
+  bin_op op;
+  std::shared_ptr<number_node> left, right;
   virtual double calculate();
 };
 }
