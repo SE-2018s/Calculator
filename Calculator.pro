@@ -24,22 +24,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    abstractcalcu.cpp \
-    scientificcalcu.cpp \
-    ordinarycalcu.cpp \
-    programcalcu.cpp
+    src/abstractcalcu.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/ordinarycalcu.cpp \
+    src/programcalcu.cpp \
+    src/scientificcalcu.cpp \
+
 
 HEADERS += \
-        mainwindow.h \
-    abstractcalcu.h \
-    scientificcalcu.h \
-    ordinarycalcu.h \
-    programcalcu.h
+    include/abstractcalcu.h \
+    include/mainwindow.h \
+    include/ordinarycalcu.h \
+    include/programcalcu.h \
+    include/scientificcalcu.h \
+
 
 FORMS += \
-        mainwindow.ui \
-    scientificcalcu.ui \
-    ordinarycalcu.ui \
-    programcalcu.ui
+    ui/mainwindow.ui \
+    ui/ordinarycalcu.ui \
+    ui/programcalcu.ui \
+    ui/scientificcalcu.ui

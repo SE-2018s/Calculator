@@ -1,4 +1,4 @@
-#include "syntax_tree.h"
+#include "./include/syntax_tree.h"
 
 #define round(r) \
   (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5)
