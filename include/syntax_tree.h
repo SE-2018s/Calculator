@@ -1,3 +1,5 @@
+#ifndef __syntax_tree__
+#define __syntax_tree__
 #include <memory>
 #include <cmath>
 namespace syntax_tree{
@@ -47,3 +49,4 @@ struct unary_op_node : syntax_node {
   virtual double calculate();
 };
 }
+#endif
