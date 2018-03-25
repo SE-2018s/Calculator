@@ -2,7 +2,7 @@
 #define __syntax_tree__
 #include <memory>
 #include <cmath>
-
+template <typename T>
 using ptr = std::shared_ptr<T>;
 using syn_tree = std::shared_ptr<syntax_tree::syntax_node>;
 
@@ -48,11 +48,11 @@ struct unary_op_node : syntax_node {
   std::shared_ptr<number_node> child;
   virtual double calculate();
 };
-}
-#endif
 struct bin_op_node : syntax_node {
   bin_op op;
   std::shared_ptr<number_node> left, right;
   virtual double calculate();
 };
 }
+
+#endif
