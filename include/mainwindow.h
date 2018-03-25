@@ -20,25 +20,29 @@ public:
 
 private slots:
     void SelectCalcu();
+    void About();
 
 private:
     Ui::MainWindow *ui;
-    //AbstractCalcu* current_calcu;
     ScientificCalcu* sci_calcu;
-    //OrdinaryCalcu* ordi_calcu;
-    //ProgramCalcu* program_calcu;
-    QMenu* main_menu;
+    OrdinaryCalcu* ordi_calcu;
+    ProgramCalcu* program_calcu;
+
+    QStackedWidget *stacked_calcu;
+
+    QMenu* type_menu;
     QMenu* about_menu;
+    QToolBar* type_toolbar;
 
     QAction* select_ordi;
     QAction* select_sci;
     QAction* select_program;
+    QAction* about_act;
 
 private:
     void CreateActions();
     void CreateMenu();
     void CreateToolBar();
-
 };
 
 #endif // MAINWINDOW_H

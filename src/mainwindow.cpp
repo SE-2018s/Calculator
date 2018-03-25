@@ -7,13 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     sci_calcu = new ScientificCalcu();
-    //ordi_calcu = new OrdinaryCalcu();
-    //program_calcu = new ProgramCalcu();
-    //current_calcu = qobject_cast<AbstractCalcu*>(sci_calcu);
-    //setCentralWidget(current_calcu);
-    setCentralWidget(sci_calcu);
+    ordi_calcu = new OrdinaryCalcu();
+    program_calcu = new ProgramCalcu();
+
+    stacked_calcu = new QStackedWidget;
+    stacked_calcu->addWidget(ordi_calcu);
+    stacked_calcu->addWidget(sci_calcu);
+    stacked_calcu->addWidget(program_calcu);
+    setCentralWidget(stacked_calcu);
     CreateActions();
     CreateMenu();
 }
@@ -36,26 +38,44 @@ void MainWindow::CreateActions()
     select_program = new QAction(tr("Program"), this);
     select_program->setStatusTip(tr("Choose programmer's calculator"));
     connect(select_program, SIGNAL(triggered()), this, SLOT(SelectCalcu()));
-}
 
+    about_act = new QAction(tr("About"), this);
+    about_act->setStatusTip(tr("About this calculator"));
+    connect(about_act, SIGNAL(triggered(bool)), this, SLOT(About()));
+}
 
 void MainWindow::CreateMenu()
 {
-    main_menu = menuBar()->addMenu(tr("&Type"));
-    main_menu->addAction(select_ordi);
-    main_menu->addAction(select_sci);
-    main_menu->addAction(select_program);
+    type_menu = menuBar()->addMenu(tr("&Type"));
+    type_menu->addAction(select_ordi);
+    type_menu->addAction(select_sci);
+    type_menu->addAction(select_program);
+    about_menu = menuBar()->addMenu(tr("&About"));
+    about_menu->addAction(about_act);
+}
+
+void MainWindow::CreateToolBar()
+{
+    type_toolbar = addToolBar(tr("&Type"));
+    type_toolbar->addAction(select_ordi);
+    type_toolbar->addAction(select_sci);
+    type_toolbar->addAction(select_program);
+    type_toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
+    addToolBar(Qt::TopToolBarArea, type_toolbar);
 }
 
 void MainWindow::SelectCalcu()
 {
     QString type = qobject_cast<QAction*>(sender())->text();
-    /*
     if (type == QString(tr("Ordinary")))
-        setCentralWidget(ordi_calcu);
-    else if (type == QString("Scientific"))
-        setCentralWidget(sci_calcu);
-    else setCentralWidget(program_calcu);
-    */
-    qDebug() << type;
+        stacked_calcu->setCurrentIndex(0);
+    else if(type == QString("Scientific"))
+        stacked_calcu->setCurrentIndex(1);
+    else stacked_calcu->setCurrentIndex(2);
+}
+
+void MainWindow::About()
+{
+    QMessageBox::about(this, tr("Mini Draw"),
+                       tr("This is the calculator designed by USTC Invincible Team"));
 }

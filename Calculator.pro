@@ -24,20 +24,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    src/abstractcalcu.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/ordinarycalcu.cpp \
     src/programcalcu.cpp \
     src/scientificcalcu.cpp \
+    src/abstractcalcu.cpp
 
 
 HEADERS += \
-    include/abstractcalcu.h \
     include/mainwindow.h \
     include/ordinarycalcu.h \
     include/programcalcu.h \
     include/scientificcalcu.h \
+    include/abstractcalcu.h
 
 
 FORMS += \

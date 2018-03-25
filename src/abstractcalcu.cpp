@@ -1,5 +1,5 @@
-#include "./include/abstractcalcu.h"
-#include "ui_abstractcalcu.h"
+#include "include/abstractcalcu.h"
+
 #include <QDebug>
 AbstractCalcu::AbstractCalcu(QWidget *parent) :
     QWidget(parent)
