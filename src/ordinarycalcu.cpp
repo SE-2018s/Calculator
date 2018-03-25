@@ -1,4 +1,4 @@
-#include "ordinarycalcu.h"
+#include "include/ordinarycalcu.h"
 #include "ui_ordinarycalcu.h"
 
 OrdinaryCalcu::OrdinaryCalcu() :

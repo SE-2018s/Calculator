@@ -1,4 +1,4 @@
-#include "programcalcu.h"
+#include "include/programcalcu.h"
 #include "ui_programcalcu.h"
 
 ProgramCalcu::ProgramCalcu()

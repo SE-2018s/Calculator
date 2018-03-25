@@ -1,4 +1,4 @@
-#include "scientificcalcu.h"
+#include "include/scientificcalcu.h"
 #include "ui_scientificcalcu.h"
 #include <QDebug>
 
