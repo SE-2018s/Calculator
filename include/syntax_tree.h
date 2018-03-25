@@ -1,6 +1,8 @@
+#ifndef __syntax_tree__
+#define __syntax_tree__
 #include <memory>
 #include <cmath>
-
+template <typename T>
 using ptr = std::shared_ptr<T>;
 using syn_tree = std::shared_ptr<syntax_tree::syntax_node>;
 
@@ -52,3 +54,5 @@ struct bin_op_node : syntax_node {
   virtual double calculate();
 };
 }
+
+#endif
