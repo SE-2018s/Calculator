@@ -29,15 +29,16 @@ SOURCES += \
     src/ordinarycalcu.cpp \
     src/programcalcu.cpp \
     src/scientificcalcu.cpp \
-    src/abstractcalcu.cpp
-
+    src/abstractcalcu.cpp \
+    src/token.cpp
 
 HEADERS += \
     include/mainwindow.h \
     include/ordinarycalcu.h \
     include/programcalcu.h \
     include/scientificcalcu.h \
-    include/abstractcalcu.h
+    include/abstractcalcu.h \
+    include/token.h
 
 
 FORMS += \
