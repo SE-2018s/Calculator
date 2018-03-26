@@ -215,8 +215,20 @@ void insert(std::vector<token_list::token_node*> &list, token_list::unary_op op)
     list.push_back(node);
 }
 
+void List::getNum(double i){
+    *this << i;
+}
+
 void List::getString(std::string str){
     *this << 1 << "+" << 2 << "end";
+
+}
+
+void List::getString(std::string str, std::string token){
+    *this << 1 << "+" << 2 << "end";
+    if(str == "back" && token != ""){
+        this->list_.pop_back();
+    }
 }
 
 
