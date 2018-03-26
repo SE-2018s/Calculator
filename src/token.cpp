@@ -132,7 +132,7 @@ void binop_node::calculate(std::stack<ptr<token_node>> &operands) {
       p->value = op1 / op2;
       break;
     case bin_op::modulo : 
-      p->value = int(op1) % int(op2);
+      p->value = round(op1) % round(op2);
       break;
     case bin_op::exponentiation : 
       p->value = powl(op1, op2);
@@ -177,7 +177,7 @@ void unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
       break;
     }
     case unary_op::factorial : {
-      int t = int(op);
+      int t = round(op);
       int rst = 1;
       while (t > 1) {
         rst *= t;
@@ -225,22 +225,16 @@ double List::calculate() {
   return dynamic_cast<float_node*>(operands.top().get())->value;
 }
 
-List& operator<<(List& me, token_list::unary_op op) {
-  insert(me.list_, op);
-  return me;
-}    
 // List& operator<<(List& me, token_list::unary_op op) {
 //   insert(me.list_, op);
 //   return me;
-// }
-List& operator<<(List& me, token_list::bin_op op) {
-  insert(me.list_, op);
-  return me;
-}
+// }    
+
 // List& operator<<(List& me, token_list::bin_op op) {
 //   insert(me.list_, op);
 //   return me;
 // }
+
 List& operator<<(List& me, double n) {
   insert(me.list_, n);
   return me;

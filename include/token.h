@@ -1,3 +1,5 @@
+#ifndef __token_h__
+#define __token_h__
 #include <vector>
 #include <memory>
 #include <stack>
@@ -7,7 +9,10 @@
 #include <iostream>
 #endif
 
+#define round(r) ( r > 0.0) ? (int)( r +0.5) : (int)( r -0.5)
+
 namespace token_list {
+
 
 template <typename T>
 using ptr = std::shared_ptr<T>;
@@ -81,8 +86,6 @@ class List {
     public:
     std::stack<ptr<token_node>> operators, operands;
     std::vector<token_list::token_node*> list_;
-    friend List& operator<<(List& me, token_list::unary_op op);
-    friend List& operator<<(List& me, token_list::bin_op op);
     friend List& operator<<(List& me, double n);
     friend List& operator<<(List& me, int n);
     friend List& operator<<(List& me, std::string s);
@@ -90,3 +93,5 @@ class List {
 };
 
 }
+
+#endif
