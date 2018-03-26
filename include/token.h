@@ -3,10 +3,10 @@
 #include <stack>
 #include <cmath>
 
-
+#ifdef debug
 #include <iostream>
+#endif
 
-// using syn_tree = std::shared_ptr<syntax_tree::syntax_node>;
 namespace token_list {
 
 template <typename T>
@@ -72,4 +72,21 @@ struct end_node : operator_node {
   void calculate(std::stack<ptr<token_node>> &operands) {exit(1);};
 
 };
+
+void insert(std::vector<token_list::token_node*> &list, double n);
+void insert(std::vector<token_list::token_node*> &list, token_list::bin_op op);
+void insert(std::vector<token_list::token_node*> &list, token_list::unary_op op);
+
+class List {
+    public:
+    std::stack<ptr<token_node>> operators, operands;
+    std::vector<token_list::token_node*> list_;
+    friend List& operator<<(List& me, token_list::unary_op op);
+    friend List& operator<<(List& me, token_list::bin_op op);
+    friend List& operator<<(List& me, double n);
+    friend List& operator<<(List& me, int n);
+    friend List& operator<<(List& me, std::string s);
+    double calculate();
+};
+
 }
