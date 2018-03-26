@@ -63,11 +63,12 @@ void operator_node::processor(std::stack<ptr<token_node>> &operators, std::stack
   std::cerr << "processing a operator\n";
   while (!operators.empty() && this->should_pop(operators.top().get(), this)) {
     std::cerr << "pop one from operators\n";
-    auto rst = operators.top()->calculate(operands);
-    if (rst) {
-      std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
-      operands.push(rst);
-    }
+    // auto rst = 
+    operators.top()->calculate(operands);
+    // if (rst) {
+    //   std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
+    //   operands.push(rst);
+    // }
     operators.pop();
   }
   // if (dynamic_cast<rightparen_node*>(this)) return;
@@ -76,35 +77,37 @@ void operator_node::processor(std::stack<ptr<token_node>> &operators, std::stack
 }
 
 void rightparen_node::processor(std::stack<ptr<token_node>> &operators, std::stack<ptr<token_node>> &operands) {
-  std::cerr << "processing a (\n";
+  std::cerr << "processing a )\n";
   while (true) {
     auto top = operators.top();
     if (!top) exit(1);
     if (dynamic_cast<unaryop_node*>(top.get()) || dynamic_cast<leftparen_node*>(top.get())) {
       std::cerr << "top is unary or (\n";
-      auto rst = top->calculate(operands);
-      std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
-      operands.push(rst);
+      // auto rst = 
+      top->calculate(operands);
+      // std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
+      // operands.push(rst);
       operators.pop();
       return;
     } else {
       std::cerr << "top is binop\n";
-      auto rst = top->calculate(operands);
-      std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
-      operands.push(rst);
+      // auto rst = 
+      top->calculate(operands);
+      // std::cerr << "get a result " << dynamic_cast<float_node*>(rst.get()) << ", push to operands\n";
+      // operands.push(rst);
       operators.pop();
 
     }
   }
 }
 
-ptr<token_node> binop_node::calculate(std::stack<ptr<token_node>> &operands) {
+void binop_node::calculate(std::stack<ptr<token_node>> &operands) {
   if (operands.empty()) exit(1);
   auto op2 = dynamic_cast<float_node*>(operands.top().get())->value;
   operands.pop();
   if (operands.empty()) exit(1);
   auto op1 = dynamic_cast<float_node*>(operands.top().get())->value;
-  operands.pop();
+  operands.pop(); 
   ptr<float_node> p(new float_node);
   switch(this->op) {
     case bin_op::plus: 
@@ -126,13 +129,16 @@ ptr<token_node> binop_node::calculate(std::stack<ptr<token_node>> &operands) {
       p->value = powl(op1, op2);
       break;
   }
-  return p;
+  std::cerr << "calculating bin op " << this->op << " with operand " << op1 << " " << op2 << " and result is " << p->value << std::endl;
+  operands.push(p);
+  // return p;
 }
 
-ptr<token_node> unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
+void unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
   if (operands.empty()) exit(1);
   auto op = dynamic_cast<float_node*>(operands.top().get())->value;
   operands.pop();
+  // std::cerr << "calculating bin op " << this->op << " with operand " << op << std::endl; 
   ptr<float_node> p(new float_node);
   switch(this->op) {
     case unary_op::positive : {
@@ -176,7 +182,10 @@ ptr<token_node> unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
     default :
       exit(1);
   }
-  return p;
+  
+  std::cerr << "calculating bin op " << this->op << " with operand " << op << " and result is " << p->value << std::endl ; 
+  operands.push(p);
+  // return p;
 }
 
 
