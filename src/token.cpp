@@ -215,6 +215,12 @@ void insert(std::vector<token_list::token_node*> &list, token_list::unary_op op)
     list.push_back(node);
 }
 
+void List::getString(std::string str){
+    list << str;
+
+}
+
+
 double List::calculate() {
   for (auto t : list_) {
     t->processor(operators, operands);
