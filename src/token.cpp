@@ -216,8 +216,7 @@ void insert(std::vector<token_list::token_node*> &list, token_list::unary_op op)
 }
 
 void List::getString(std::string str){
-    list << str;
-
+    *this << 1 << "+" << 2 << "end";
 }
 
 

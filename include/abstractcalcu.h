@@ -5,6 +5,7 @@
 #include <QtWidgets>
 #include <QToolButton>
 #include <QLineEdit>
+#include <string>
 #include "token.h"
 
 class AbstractCalcu : public QWidget
@@ -45,9 +46,9 @@ protected:
     QString output;
 
     // zevin's modification.
-private:
+public:
     token_list::List list;
-
+    std::string test;
 };
 
 #endif // ABSTRACTCALCU_H
