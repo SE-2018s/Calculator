@@ -1,5 +1,5 @@
 #include "include/abstractcalcu.h"
-#include "include/token.h"
+//#include "include/token.h"
 #include <iostream>
 #include <string>
 #include <QDebug>
@@ -78,8 +78,10 @@ void AbstractCalcu::digitClicked()
     else if(str == "="){
         std::string expr = output.toUtf8().toStdString();
         expr += " end";
-        list.getString(expr);
-//        double result = list.calculate();
+        list.getString("");
+        std::cerr << "herererere" ;
+        double result = list.calculate();
+        std::cerr << result ;
     }
 //    else if(str == )
 
