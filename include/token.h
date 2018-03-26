@@ -89,6 +89,7 @@ class List {
     friend List& operator<<(List& me, double n);
     friend List& operator<<(List& me, int n);
     friend List& operator<<(List& me, std::string s);
+    void getString(std::string str);
     double calculate();
 };
 

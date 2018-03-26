@@ -1,5 +1,7 @@
 #include "include/abstractcalcu.h"
-
+#include "include/token.h"
+#include <iostream>
+#include <string>
 #include <QDebug>
 AbstractCalcu::AbstractCalcu(QWidget *parent) :
     QWidget(parent)
@@ -56,6 +58,47 @@ void AbstractCalcu::digitClicked()
 {
     QToolButton* button = qobject_cast<QToolButton*>(sender());
     QString value = button->text();
-    output.append(value);
+    std::string str = value.toUtf8().toStdString();
+
+    // as for sin,cos,exp,tan,log we need '('
+    if(str == "sin" ||
+            str == "cos" ||
+            str == "tan" ||
+            str == "log" ||
+            str == "exp" ){
+        str += "(";
+        value += "(";
+    }
+    // if meets backspace, then delete chars on the right of the last ' '.
+    else if(str == "back"){
+        int pos =output.lastIndexOf(QChar(' '));
+        output.truncate(pos);
+    }
+    // '=': then we need to add the output to the list and calculate.
+    else if(str == "="){
+        std::string expr = output.toUtf8().toStdString();
+        expr += " end";
+        list.getString(expr);
+//        double result = list.calculate();
+    }
+//    else if(str == )
+
+    // to delete the token when meet backspace,
+    // add ' ' in front of the tokens
+    if (str != "back" && str != "=") {
+        str = " " + str;
+        value = " " + value;
+    }
+
+    std::cout << str << std::endl;
+    std::cout << output.toUtf8().toStdString();
+    std::cout.flush();
+    if(str != "back" && str != "=")
+        output.append(value);
+
+    // at least '0'
+    if(output.length() == 0)
+        output = "0";
     display->setText(output);
+
 }

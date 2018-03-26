@@ -5,7 +5,7 @@
 #include <QtWidgets>
 #include <QToolButton>
 #include <QLineEdit>
-
+#include "token.h"
 
 class AbstractCalcu : public QWidget
 {
@@ -43,6 +43,11 @@ protected:
     QToolButton *backspaceButton;
 
     QString output;
+
+    // zevin's modification.
+private:
+    token_list::List list;
+
 };
 
 #endif // ABSTRACTCALCU_H
