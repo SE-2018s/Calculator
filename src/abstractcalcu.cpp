@@ -1,6 +1,12 @@
 #include "include/abstractcalcu.h"
-
+//#include "include/token.h"
+#include <iostream>
+#include <string>
 #include <QDebug>
+#include <cmath>
+#include <cstdlib>
+
+#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl; std::cout.flush();
 AbstractCalcu::AbstractCalcu(QWidget *parent) :
     QWidget(parent)
 {
@@ -56,6 +62,150 @@ void AbstractCalcu::digitClicked()
 {
     QToolButton* button = qobject_cast<QToolButton*>(sender());
     QString value = button->text();
-    output.append(value);
+    std::string str = value.toUtf8().toStdString();
+
+
+    // number
+    DEBUG(dictStr.find(str))
+    if(dictStr.find(str) <= dictStr.length()){
+        if(numFlag == true){
+            numStr += str;
+            int pos =output.lastIndexOf(QChar(' '));
+            DEBUG(output.right(output.length() - pos).toStdString())
+            value = output.right(output.length() - pos) + value;
+            output.truncate(pos);
+        }
+        else{
+            numStr = str;
+            value = " " + value;
+        }
+        numFlag = true;
+    }
+    else{
+        if(numFlag == true){
+            DEBUG(atof(numStr.c_str()))
+            list.getNum(atof(numStr.c_str()));
+        }
+        numFlag = false;
+    }
+
+    // to delete the token when meet backspace,
+    // add ' ' in front of the tokens
+
+    // as for sin,cos,exp,tan,log we need '('
+    if(str == "sin" ||
+            str == "cos" ||
+            str == "tan" ||
+            str == "ln" ){
+        list.getString(str);
+        value = " " + value + " (";
+    }
+    else if(str == "^"){
+        value = " ^";
+        list.getString("^");
+    }
+    else if(str == "x^2"){
+        value = " ^ 2";
+        list.getString("^");
+        list.getNum(1);
+    }
+    else if(str == "x^(1/2)"){
+        value = " ^ ( 1 / 2 )";
+        list.getString("^");
+        list.getString("(");
+        list.getNum(1);
+        list.getString("/");
+        list.getNum(2);
+        list.getString(")");
+    }
+    else if(str == "1/x"){
+        value = " 1 /";
+        list.getNum(1);
+        list.getString("/");
+    }
+    else if(str == "10^x"){
+        value = " 10 ^";
+        list.getNum(10);
+        list.getString("^");
+    }
+    else if(str == "exp"){
+        value = " e ^";
+        list.getNum(M_E);
+        list.getString("^");
+    }
+    else if(str == "PI"){
+        value = " pi";
+        list.getNum(M_PI);
+    }
+    else if(str == "n!"){
+        value = " !";
+        list.getString("!");
+    }
+    else if(str == "+" ||
+            str == "-" ||
+            str == "(" ||
+            str == ")"){
+        value = " " + value;
+        list.getString(str);
+    }
+    else if(str == timesButton->text().toStdString()){
+        value = " *";
+        list.getString("*");
+    }
+    else if(str == divisionButton->text().toStdString()){
+        value = " /";
+        list.getString("/");
+    }
+    // control
+    else if(str == "CE"){
+        list.list_.clear();
+        output = "";
+    }
+    // if meets backspace, then delete chars on the right of the last ' '.
+    else if(str == "back"){
+        int pos =output.lastIndexOf(QChar(' '));
+        std::string token = output.right(output.length() - pos - 1).toStdString();
+        if(token == "("){
+            output.truncate(pos);
+            pos =output.lastIndexOf(QChar(' '));
+            token = output.right(output.length() - pos - 1).toStdString();
+        }
+        list.getString("back");
+        output.truncate(pos);
+    }
+    // '=': then we need to add the output to the list and calculate.
+    else if(str == "="){
+        list.getString("end");
+        double result = list.calculate();
+        DEBUG("")
+        list = token_list::List();
+        numFlag = false;
+        DEBUG("")
+        list.getNum(result);
+        DEBUG(result)
+        std::string finalResult = std::to_string(result);
+        // delete the tailing '0' and '.'
+        int posPoint = finalResult.find('.');
+        if(posPoint < finalResult.length()){
+            int posZero = finalResult.find_last_of('0');
+            while(posZero > posPoint && posZero == finalResult.length() - 1){
+                finalResult.pop_back();
+                posZero = finalResult.find_last_of('0');
+            }
+            if (posPoint == finalResult.length() - 1)
+                finalResult.pop_back();
+        }
+        output = QString::fromStdString(finalResult);
+    }
+
+    if(str != "CE" && str != "back" && str != "=")
+        output.append(value);
+    std::cout << output.toUtf8().toStdString();
+    std::cout.flush();
+
+    // at least '0'
+    if(output.length() == 0)
+        output = "0";
     display->setText(output);
+
 }

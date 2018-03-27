@@ -1,5 +1,6 @@
 #include "include/token.h"
 
+#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl;
 
 // 设置两个栈，一个存操作数(operand)，一个存操作符(operator)
 // 每个token有processor方法，从输入中依次读到该token时调用
@@ -214,6 +215,31 @@ void insert(std::vector<token_list::token_node*> &list, token_list::unary_op op)
     node->op = op;
     list.push_back(node);
 }
+
+void List::getNum(double i){
+    *this << i;
+}
+
+void List::getString(std::string str){
+    if(str != "back"){
+        *this << str;
+        DEBUG(str);
+    }
+    else {
+        this->list_.pop_back();
+    }
+}
+
+//void List::getString(std::string str, std::string token){
+//    if(str != "back" || token == ""){
+//        return;
+//    }
+//    // 如果list中最后一个是sin,cos,tan,ln等自动加(的token，则忽视
+//    switch (this->list_.back()->token_node){
+//        case
+//    }
+//}
+
 
 double List::calculate() {
   for (auto t : list_) {
