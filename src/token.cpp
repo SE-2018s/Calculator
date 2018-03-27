@@ -257,7 +257,7 @@ double List::calculate() {
     for (auto t : list_) {
         t->processor(operators, operands);
     }
-    if (operands.size() != 1) {
+    if (operands.size() != 1 || operators.size() != 1) {
         throw("syntax error!\n");
     }
     return dynamic_cast<float_node*>(operands.top().get())->value;
