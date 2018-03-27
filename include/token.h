@@ -97,6 +97,7 @@ class List {
     void getString(std::string str);
 //    void getString(std::string str, std::string token);
     double calculate();
+    void entire_neg();
 };
 
 }

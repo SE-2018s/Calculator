@@ -95,7 +95,16 @@ void rightparen_node::processor(std::stack<ptr<token_node>> &operators, std::sta
 #endif 
       top->calculate(operands);
       operators.pop();
-      return;
+      if (dynamic_cast<unaryop_node*>(top.get())) {
+        if (dynamic_cast<unaryop_node*>(top.get())->op == positive || dynamic_cast<unaryop_node*>(top.get())->op == negative) {
+
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+
     } else {
 #ifdef debug
       std::cerr << "top is binop\n";
@@ -148,7 +157,7 @@ void binop_node::calculate(std::stack<ptr<token_node>> &operands) {
 }
 
 void unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
-  if (operands.empty()) {
+  if (operands.empty()){// || operands.size() > 1) {
     throw("syntax error!\n");
   }
   auto op = dynamic_cast<float_node*>(operands.top().get())->value;
@@ -280,13 +289,17 @@ List& operator<<(List& me, int n) {
 }
 List& operator<<(List& me, std::string s) {
   if (s == "+") {
-    if (dynamic_cast<token_list::number_node*>(me.list_.back()) || dynamic_cast<token_list::rightparen_node*>(me.list_.back())) {
+    if (me.list_.empty()) {
+      insert(me.list_, token_list::positive);
+    } else if (dynamic_cast<token_list::number_node*>(me.list_.back()) || dynamic_cast<token_list::rightparen_node*>(me.list_.back())) {
       insert(me.list_, token_list::plus);
     } else {
       insert(me.list_, token_list::positive);
     }
   } else if (s == "-") {
-    if (dynamic_cast<token_list::number_node*>(me.list_.back()) || dynamic_cast<token_list::rightparen_node*>(me.list_.back())) {
+    if (me.list_.empty()) {
+      insert(me.list_, token_list::negative);
+    } else if (dynamic_cast<token_list::number_node*>(me.list_.back()) || dynamic_cast<token_list::rightparen_node*>(me.list_.back())) {
       insert(me.list_, token_list::minus);
     } else {
       insert(me.list_, token_list::negative);
@@ -317,6 +330,14 @@ List& operator<<(List& me, std::string s) {
     me.list_.push_back(new token_list::end_node);
   }
   return me;
+}
+
+void List::entire_neg() {
+  list_.insert(list_.begin(), new leftparen_node);
+  auto tmp = new unaryop_node;
+  tmp->op = negative;
+  list_.insert(list_.begin(), tmp);
+  list_.push_back(new rightparen_node);
 }
 
 } //namespace token_list
