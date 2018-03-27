@@ -13,6 +13,8 @@ AbstractCalcu::AbstractCalcu(QWidget *parent, int minw, int minh, int iconsize, 
 =======
 #include <cmath>
 #include <cstdlib>
+
+#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl; std::cout.flush();
 AbstractCalcu::AbstractCalcu(QWidget *parent) :
     QWidget(parent)
 >>>>>>> origin/master
@@ -80,13 +82,12 @@ void AbstractCalcu::digitClicked()
 
 
     // number
-    std::cout << __LINE__ << dictStr.find(str);
+    DEBUG(dictStr.find(str))
     if(dictStr.find(str) <= dictStr.length()){
         if(numFlag == true){
             numStr += str;
             int pos =output.lastIndexOf(QChar(' '));
-            std::cout << output.right(output.length() - pos).toStdString() << std::endl;
-            std::cout << __LINE__ << std::endl;
+            DEBUG(output.right(output.length() - pos).toStdString())
             value = output.right(output.length() - pos) + value;
             output.truncate(pos);
         }
@@ -98,9 +99,8 @@ void AbstractCalcu::digitClicked()
     }
     else{
         if(numFlag == true){
-            std::cout << __LINE__ << std::endl;
+            DEBUG(atof(numStr.c_str()))
             list.getNum(atof(numStr.c_str()));
-            std::cout << __LINE__ << std::endl;
         }
         numFlag = false;
     }
@@ -180,7 +180,6 @@ void AbstractCalcu::digitClicked()
     // if meets backspace, then delete chars on the right of the last ' '.
     else if(str == "back"){
         int pos =output.lastIndexOf(QChar(' '));
-//        std::cout << __LINE__ << std::endl;
         std::string token = output.right(output.length() - pos - 1).toStdString();
         if(token == "("){
             output.truncate(pos);
@@ -194,10 +193,25 @@ void AbstractCalcu::digitClicked()
     else if(str == "="){
         list.getString("end");
         double result = list.calculate();
-        list.list_.clear();
+        DEBUG("")
+        list = token_list::List();
+        numFlag = false;
+        DEBUG("")
         list.getNum(result);
-        std::cerr << result ;
-        output = QString::fromStdString(std::to_string(result));
+        DEBUG(result)
+        std::string finalResult = std::to_string(result);
+        // delete the tailing '0' and '.'
+        int posPoint = finalResult.find('.');
+        if(posPoint < finalResult.length()){
+            int posZero = finalResult.find_last_of('0');
+            while(posZero > posPoint && posZero == finalResult.length() - 1){
+                finalResult.pop_back();
+                posZero = finalResult.find_last_of('0');
+            }
+            if (posPoint == finalResult.length() - 1)
+                finalResult.pop_back();
+        }
+        output = QString::fromStdString(finalResult);
     }
 
     if(str != "CE" && str != "back" && str != "=")
