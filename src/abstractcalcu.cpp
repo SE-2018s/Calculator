@@ -76,6 +76,8 @@ void AbstractCalcu::digitClicked()
     QString value = button->text();
     std::string str = value.toUtf8().toStdString();
 
+    // to delete the token when meet backspace,
+    // add ' ' in front of the tokens
 
     // number
     DEBUG(dictStr.find(str))
@@ -101,9 +103,6 @@ void AbstractCalcu::digitClicked()
         numFlag = false;
     }
 
-    // to delete the token when meet backspace,
-    // add ' ' in front of the tokens
-
     // as for sin,cos,exp,tan,log we need '('
     if(str == "sin" ||
             str == "cos" ||
@@ -112,15 +111,18 @@ void AbstractCalcu::digitClicked()
         list.getString(str);
         value = " " + value + " (";
     }
+    // ^
     else if(str == "^"){
         value = " ^";
         list.getString("^");
     }
+    // ^ 2
     else if(str == "x^2"){
         value = " ^ 2";
         list.getString("^");
         list.getNum(2);
     }
+    // ^ ( 1 / 2 )
     else if(str == "x^(1/2)"){
         value = " ^ ( 1 / 2 )";
         list.getString("^");
@@ -130,45 +132,54 @@ void AbstractCalcu::digitClicked()
         list.getNum(2);
         list.getString(")");
     }
+    // 1 /
     else if(str == "1/x"){
         value = " 1 /";
         list.getNum(1);
         list.getString("/");
     }
+    // 10 ^
     else if(str == "10^x"){
         value = " 10 ^";
         list.getNum(10);
         list.getString("^");
     }
+    // e ^
     else if(str == "exp"){
         value = " e ^";
         list.getNum(M_E);
         list.getString("^");
     }
+    // pi
     else if(str == "PI"){
         value = " pi";
         list.getNum(M_PI);
     }
+    // !
     else if(str == "n!"){
         value = " !";
         list.getString("!");
     }
+    // +-()
     else if(str == "+" ||
             str == "-" ||
             str == "(" ||
-            str == ")" ||
-            str == "%"){
+            str == ")" ){
         value = " " + value;
         list.getString(str);
     }
-    else if(str == "mod"){
+    // modulo
+    else if(str == "mod" ||
+            str == "%"){
         value = " %";
         list.getString("%");
     }
+    // *
     else if(str == timesButton->text().toStdString()){
         value = " *";
         list.getString("*");
     }
+    // /
     else if(str == divisionButton->text().toStdString()){
         value = " /";
         list.getString("/");
