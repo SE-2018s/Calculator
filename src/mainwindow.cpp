@@ -6,7 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    //ui->setupUi(this);
+    this->setFixedSize(4*5*6*3, 7*8*9);
+
     sci_calcu = new ScientificCalcu();
     ordi_calcu = new OrdinaryCalcu();
     program_calcu = new ProgramCalcu();

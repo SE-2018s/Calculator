@@ -3,10 +3,10 @@
 #include <QDebug>
 
 ScientificCalcu::ScientificCalcu()
-    : AbstractCalcu(nullptr),
+    : AbstractCalcu(nullptr, 24*3, 7*8, 20, 16),
        ui(new Ui::ScientificCalcu)
 {
-    ui->setupUi(this);
+    //9 blocks
     BuildButtons();
     SetCalcuLayout();
 }
@@ -19,16 +19,20 @@ ScientificCalcu::~ScientificCalcu()
 void ScientificCalcu::BuildButtons()
 {
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
+    squareButton->setIcon(QIcon(":/new/icon/square.png"));
     powButton = createButton(tr("^"), SLOT(digitClicked()));
     sinButton = createButton(tr("sin"), SLOT(digitClicked()));
     cosButton = createButton(tr("cos"), SLOT(digitClicked()));
     tanButton = createButton(tr("tan"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"),SLOT(digitClicked()));
+    squareRootButton->setIcon(QIcon(":/new/icon/sroot.png"));
     tenExpButton = createButton(tr("10^x"), SLOT(digitClicked()));
+    tenExpButton->setIcon(QIcon(":/new/icon/tenpow.png"));
     logButton = createButton(tr("log"), SLOT(digitClicked()));
     expButton = createButton(tr("exp"), SLOT(digitClicked()));
     modButton = createButton(tr("mod"), SLOT(digitClicked()));
     upButton = createButton(tr("up"), SLOT(digitClicked()));
+    upButton->setIcon(QIcon(":/new/icon/arrow.png"));
 
 
     piButton = createButton(tr("PI"), SLOT(digitClicked()));
@@ -42,6 +46,8 @@ void ScientificCalcu::SetCalcuLayout()
 {
     QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
     mainLayout->addWidget(display, 0, 0, 1, 5);
     mainLayout->addWidget(squareButton, 1, 0);
     mainLayout->addWidget(powButton, 1, 1);

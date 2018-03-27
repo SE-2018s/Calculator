@@ -13,7 +13,7 @@ class AbstractCalcu : public QWidget
     Q_OBJECT
 
 public:
-    explicit AbstractCalcu(QWidget *parent = 0);
+    explicit AbstractCalcu(QWidget *parent, int, int, int, int);
     virtual ~AbstractCalcu();
 
 protected slots:
@@ -42,7 +42,10 @@ protected:
     QToolButton *clearEntryButton;
     QToolButton *clearButton;
     QToolButton *backspaceButton;
-
+    const int minwidth;
+    const int minheight;
+    const int fontsize;
+    const int iconsize;
     QString output;
 
     // zevin's modification.
