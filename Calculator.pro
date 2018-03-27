@@ -29,14 +29,8 @@ SOURCES += \
     src/abstractcalcu.cpp \
     src/ordinarycalcu.cpp \
     src/programcalcu.cpp \
-<<<<<<< HEAD
-    src/scientificcalcu.cpp
-
-=======
     src/scientificcalcu.cpp \
-    src/abstractcalcu.cpp \
     src/token.cpp
->>>>>>> origin/master
 
 HEADERS += \
     include/mainwindow.h \
@@ -44,11 +38,7 @@ HEADERS += \
     include/programcalcu.h \
     include/scientificcalcu.h \
     include/abstractcalcu.h \
-<<<<<<< HEAD
-    include/scientificcalcu.h
-=======
     include/token.h
->>>>>>> origin/master
 
 
 FORMS += \
