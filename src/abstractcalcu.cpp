@@ -156,9 +156,14 @@ void AbstractCalcu::digitClicked()
     else if(str == "+" ||
             str == "-" ||
             str == "(" ||
-            str == ")"){
+            str == ")" ||
+            str == "%"){
         value = " " + value;
         list.getString(str);
+    }
+    else if(str == "mod"){
+        value = " %";
+        list.getString("%");
     }
     else if(str == timesButton->text().toStdString()){
         value = " *";
@@ -210,9 +215,14 @@ void AbstractCalcu::digitClicked()
         output = QString::fromStdString(finalResult);
     }
 
-    if(str != "CE" && str != "back" && str != "=")
-        output.append(value);
-    std::cout << output.toUtf8().toStdString();
+    if(str != "CE" && str != "back" && str != "="){
+        if(output == "0")
+            output = value;
+        else{
+            output.append(value);
+        }
+
+    }std::cout << output.toUtf8().toStdString();
     std::cout.flush();
 
     // at least '0'

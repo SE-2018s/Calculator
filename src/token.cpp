@@ -228,6 +228,7 @@ void List::getString(std::string str){
         DEBUG(str);
     }
     else {
+        if(! this->list_.empty())
         this->list_.pop_back();
     }
 }
