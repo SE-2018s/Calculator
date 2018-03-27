@@ -61,9 +61,33 @@ void AbstractCalcu::digitClicked()
     QToolButton* button = qobject_cast<QToolButton*>(sender());
     QString value = button->text();
     std::string str = value.toUtf8().toStdString();
-    std::string dictStr = "0123456789.";
-    std::string numStr;
-    bool numFlag = false;
+
+
+    // number
+    std::cout << __LINE__ << dictStr.find(str);
+    if(dictStr.find(str) <= dictStr.length()){
+        if(numFlag == true){
+            numStr += str;
+            int pos =output.lastIndexOf(QChar(' '));
+            std::cout << output.right(output.length() - pos).toStdString() << std::endl;
+            std::cout << __LINE__ << std::endl;
+            value = output.right(output.length() - pos) + value;
+            output.truncate(pos);
+        }
+        else{
+            numStr = str;
+            value = " " + value;
+        }
+        numFlag = true;
+    }
+    else{
+        if(numFlag == true){
+            std::cout << __LINE__ << std::endl;
+            list.getNum(atof(numStr.c_str()));
+            std::cout << __LINE__ << std::endl;
+        }
+        numFlag = false;
+    }
 
     // to delete the token when meet backspace,
     // add ' ' in front of the tokens
@@ -140,42 +164,30 @@ void AbstractCalcu::digitClicked()
     // if meets backspace, then delete chars on the right of the last ' '.
     else if(str == "back"){
         int pos =output.lastIndexOf(QChar(' '));
-        std::cerr << output.right(output.length() - pos).toStdString();
-        list.getString(str, output.right(output.length() - pos).toStdString());
+//        std::cout << __LINE__ << std::endl;
+        std::string token = output.right(output.length() - pos - 1).toStdString();
+        if(token == "("){
+            output.truncate(pos);
+            pos =output.lastIndexOf(QChar(' '));
+            token = output.right(output.length() - pos - 1).toStdString();
+        }
+        list.getString("back");
         output.truncate(pos);
     }
     // '=': then we need to add the output to the list and calculate.
     else if(str == "="){
         list.getString("end");
         double result = list.calculate();
+        list.list_.clear();
+        list.getNum(result);
         std::cerr << result ;
         output = QString::fromStdString(std::to_string(result));
     }
-    // number
-    if(dictStr.find(str) < dictStr.length()){
-        std::cout << "herere" << std::endl;
-        std::cout << str <<std::endl;
-        if(numFlag == true){
-            numStr += str;
-        }
-        else{
-            value = " " + value;
-            numStr = str;
-        }
-        numFlag = true;
-    }
-    else{
-        if(numFlag == true){
-            list.getNum(atof(numStr.c_str()));
-        }
-        numFlag = false;
-    }
 
-    std::cout << str << std::endl;
-    std::cout << output.toUtf8().toStdString();
-    std::cout.flush();
     if(str != "CE" && str != "back" && str != "=")
         output.append(value);
+    std::cout << output.toUtf8().toStdString();
+    std::cout.flush();
 
     // at least '0'
     if(output.length() == 0)

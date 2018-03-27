@@ -220,16 +220,26 @@ void List::getNum(double i){
 }
 
 void List::getString(std::string str){
-    *this << 1 << "+" << 2 << "end";
-
-}
-
-void List::getString(std::string str, std::string token){
-    *this << 1 << "+" << 2 << "end";
-    if(str == "back" && token != ""){
+    if(str != "back"){
+        std::cout << __LINE__ << std::endl;
+        std::cout << str << std::endl;
+        *this << str;
+        std::cout << __LINE__ << std::endl;
+    }
+    else {
         this->list_.pop_back();
     }
 }
+
+//void List::getString(std::string str, std::string token){
+//    if(str != "back" || token == ""){
+//        return;
+//    }
+//    // 如果list中最后一个是sin,cos,tan,ln等自动加(的token，则忽视
+//    switch (this->list_.back()->token_node){
+//        case
+//    }
+//}
 
 
 double List::calculate() {

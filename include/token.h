@@ -4,7 +4,8 @@
 #include <memory>
 #include <stack>
 #include <cmath>
-
+#include <iostream>
+#include <string>
 #ifdef debug
 #include <iostream>
 #endif
@@ -91,7 +92,7 @@ class List {
     friend List& operator<<(List& me, std::string s);
     void getNum(double i);
     void getString(std::string str);
-    void getString(std::string str, std::string token);
+//    void getString(std::string str, std::string token);
     double calculate();
 };
 
