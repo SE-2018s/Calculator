@@ -3,21 +3,17 @@
 #include <iostream>
 #include <string>
 #include <QDebug>
-<<<<<<< HEAD
+#include <cmath>
+#include <cstdlib>
+
+#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl; std::cout.flush();
+
 AbstractCalcu::AbstractCalcu(QWidget *parent, int minw, int minh, int iconsize, int fontsize) :
     QWidget(parent),
     minwidth(minw),
     minheight(minh),
     iconsize(iconsize),
     fontsize(fontsize)
-=======
-#include <cmath>
-#include <cstdlib>
-
-#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl; std::cout.flush();
-AbstractCalcu::AbstractCalcu(QWidget *parent) :
-    QWidget(parent)
->>>>>>> origin/master
 {
     BuildButtons();
 }
@@ -29,7 +25,7 @@ AbstractCalcu::~AbstractCalcu()
 
 void AbstractCalcu::BuildButtons()
 {
-    display = new QLineEdit("0");
+    display = new QLineEdit("");
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
     display->setMinimumHeight(2*minheight);
@@ -123,7 +119,7 @@ void AbstractCalcu::digitClicked()
     else if(str == "x^2"){
         value = " ^ 2";
         list.getString("^");
-        list.getNum(1);
+        list.getNum(2);
     }
     else if(str == "x^(1/2)"){
         value = " ^ ( 1 / 2 )";

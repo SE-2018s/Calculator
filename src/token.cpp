@@ -38,7 +38,7 @@ bool token_node::should_pop(token_node* top, token_node* next) {
           case bin_op::modulo :
             return (int)top_op->op >= (int)bin_op::modulo;
           case bin_op::divide : 
-            return (int)top_op->op >= (int)bin_op::multiply;
+            return (int)top_op->op >= (int)bin_op::divide;
           case bin_op::multiply : 
             return (int)top_op->op >= (int)bin_op::multiply;
           case bin_op::minus :
@@ -244,13 +244,19 @@ void List::getString(std::string str){
 
 
 double List::calculate() {
-  for (auto t : list_) {
-    t->processor(operators, operands);
-  }
-  if (operands.size() != 1) {
-    throw("syntax error!\n");
-  }
-  return dynamic_cast<float_node*>(operands.top().get())->value;
+    try{
+        for (auto t : list_) {
+            t->processor(operators, operands);
+        }
+        if (operands.size() != 1) {
+            throw("syntax error!\n");
+        }
+        return dynamic_cast<float_node*>(operands.top().get())->value;
+    }
+    catch(const char* errmsg){
+        std::cerr << errmsg;
+    }
+
 }
 
 // List& operator<<(List& me, token_list::unary_op op) {
