@@ -6,7 +6,6 @@ OrdinaryCalcu::OrdinaryCalcu() :
     ui(new Ui::OrdinaryCalcu)
 {
     //8 blocks
-    //ui->setupUi(this);
     BuildButtons();
     SetCalcuLayout();
 }

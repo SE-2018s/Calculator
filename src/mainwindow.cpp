@@ -7,7 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     //ui->setupUi(this);
+    #if (defined (Q_OS_WIN32) || defined(Q_OS_WIN64))
+    this->setFixedSize(4*5*6*3+0, 7*8*9+0);
+    #elif (defined(Q_OS_MAC))
     this->setFixedSize(4*5*6*3, 7*8*9);
+    #endif
 
     sci_calcu = new ScientificCalcu();
     ordi_calcu = new OrdinaryCalcu();
@@ -78,6 +82,6 @@ void MainWindow::SelectCalcu()
 
 void MainWindow::About()
 {
-    QMessageBox::about(this, tr("Mini Draw"),
+    QMessageBox::about(this, tr("About"),
                        tr("This is the calculator designed by USTC Invincible Team"));
 }

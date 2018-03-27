@@ -6,7 +6,6 @@ ProgramCalcu::ProgramCalcu()
     ui(new Ui::ProgramCalcu)
 {
     //8 blocks
-    //ui->setupUi(this);
     BuildButtons();
     SetCalcuLayout();
 }
