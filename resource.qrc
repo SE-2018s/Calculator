@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/new">
+        <file>icon/arrow.png</file>
+        <file>icon/arrow.svg</file>
+        <file>icon/backspace.png</file>
+        <file alias="backspace">icon/backspace.svg</file>
+        <file>icon/inv.png</file>
+        <file>icon/square.png</file>
+        <file>icon/sroot.png</file>
+        <file>icon/tenpow.png</file>
+    </qresource>
+</RCC>

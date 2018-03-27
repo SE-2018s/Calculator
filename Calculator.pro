@@ -26,10 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/abstractcalcu.cpp \
     src/ordinarycalcu.cpp \
     src/programcalcu.cpp \
-    src/scientificcalcu.cpp \
-    src/abstractcalcu.cpp
+    src/scientificcalcu.cpp
 
 
 HEADERS += \
@@ -37,7 +37,8 @@ HEADERS += \
     include/ordinarycalcu.h \
     include/programcalcu.h \
     include/scientificcalcu.h \
-    include/abstractcalcu.h
+    include/abstractcalcu.h \
+    include/scientificcalcu.h
 
 
 FORMS += \
@@ -45,3 +46,13 @@ FORMS += \
     ui/ordinarycalcu.ui \
     ui/programcalcu.ui \
     ui/scientificcalcu.ui
+
+DISTFILES += \
+    icon/arrow.png \
+    icon/backspace.png \
+    icon/inv.png \
+    icon/square.png \
+    icon/sroot.png
+
+RESOURCES += \
+    resource.qrc

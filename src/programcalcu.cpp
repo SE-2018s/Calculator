@@ -1,11 +1,12 @@
-#include "programcalcu.h"
+#include "include/programcalcu.h"
 #include "ui_programcalcu.h"
 
 ProgramCalcu::ProgramCalcu()
-    :AbstractCalcu(nullptr),
+    :AbstractCalcu(nullptr, 20*3, 7*9, 26, 16),
     ui(new Ui::ProgramCalcu)
 {
-    ui->setupUi(this);
+    //8 blocks
+    //ui->setupUi(this);
     BuildButtons();
     SetCalcuLayout();
 }
@@ -38,6 +39,8 @@ void ProgramCalcu::SetCalcuLayout()
 {
 	QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(lshButton, 1, 0);
     mainLayout->addWidget(rshButton, 1, 1);

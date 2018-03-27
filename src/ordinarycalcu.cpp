@@ -1,11 +1,12 @@
-#include "ordinarycalcu.h"
+#include "include/ordinarycalcu.h"
 #include "ui_ordinarycalcu.h"
 
 OrdinaryCalcu::OrdinaryCalcu() :
-    AbstractCalcu(nullptr),
+    AbstractCalcu(nullptr, 30*3, 7*9, 30, 18),
     ui(new Ui::OrdinaryCalcu)
 {
-    ui->setupUi(this);
+    //8 blocks
+    //ui->setupUi(this);
     BuildButtons();
     SetCalcuLayout();
 }
@@ -19,14 +20,19 @@ void OrdinaryCalcu::BuildButtons()
 {
     percentButton = createButton(tr("%"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"), SLOT(digitClicked()));
+    squareRootButton->setIcon(QIcon(":/new/icon/sroot.png"));
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
+    squareButton->setIcon(QIcon(":/new/icon/square.png"));
     invButton = createButton(tr("1/x"), SLOT(digitClicked()));
+    invButton->setIcon(QIcon(":/new/icon/inv.png"));
 }
 
 void OrdinaryCalcu::SetCalcuLayout()
 {
     QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
     mainLayout->addWidget(display, 0, 0, 1, 4);
     mainLayout->addWidget(percentButton, 1, 0);
     mainLayout->addWidget(squareRootButton, 1, 1);
@@ -52,4 +58,3 @@ void OrdinaryCalcu::SetCalcuLayout()
     setLayout(mainLayout);
     setWindowTitle(tr("Ordinary Calculator"));
 }
-

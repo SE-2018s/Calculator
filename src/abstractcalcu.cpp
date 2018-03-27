@@ -1,8 +1,12 @@
 #include "include/abstractcalcu.h"
 
 #include <QDebug>
-AbstractCalcu::AbstractCalcu(QWidget *parent) :
-    QWidget(parent)
+AbstractCalcu::AbstractCalcu(QWidget *parent, int minw, int minh, int iconsize, int fontsize) :
+    QWidget(parent),
+    minwidth(minw),
+    minheight(minh),
+    iconsize(iconsize),
+    fontsize(fontsize)
 {
     BuildButtons();
 }
@@ -17,7 +21,7 @@ void AbstractCalcu::BuildButtons()
     display = new QLineEdit("0");
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(15);
+    display->setMinimumHeight(2*minheight);
     QFont font = display->font();
     font.setPointSize(font.pointSize() + 8);
     display->setFont(font);
@@ -36,6 +40,7 @@ void AbstractCalcu::BuildButtons()
     clearEntryButton = createButton(tr("CE"), SLOT(digitClicked()));
     clearButton = createButton(tr("C"), SLOT(digitClicked()));
     backspaceButton = createButton(tr("back"), SLOT(digitClicked()));
+    backspaceButton->setIcon(QIcon(":/new/icon/backspace.png"));
 }
 
 void AbstractCalcu::SetCalcuLayout()
@@ -48,6 +53,12 @@ QToolButton *AbstractCalcu::createButton(const QString &text, const char *member
     QToolButton *button = new QToolButton();
     button->setText(text);
     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    button->setMinimumWidth(minwidth);
+    button->setMinimumHeight(minheight);
+    button->setIconSize(QSize(iconsize, iconsize));
+    QFont font("Helvetica");
+    font.setPointSize(fontsize);
+    button->setFont(font);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }
