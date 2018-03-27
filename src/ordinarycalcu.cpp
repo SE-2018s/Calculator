@@ -6,7 +6,6 @@ OrdinaryCalcu::OrdinaryCalcu() :
     ui(new Ui::OrdinaryCalcu)
 {
     //8 blocks
-    //ui->setupUi(this);
     BuildButtons();
     SetCalcuLayout();
 }
@@ -20,11 +19,11 @@ void OrdinaryCalcu::BuildButtons()
 {
     percentButton = createButton(tr("%"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"), SLOT(digitClicked()));
-    squareRootButton->setIcon(QIcon(":/new/icon/sroot.png"));
+    squareRootButton->setIcon(QIcon("icon/sroot.png"));
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
-    squareButton->setIcon(QIcon(":/new/icon/square.png"));
+    squareButton->setIcon(QIcon("icon/square.png"));
     invButton = createButton(tr("1/x"), SLOT(digitClicked()));
-    invButton->setIcon(QIcon(":/new/icon/inv.png"));
+    invButton->setIcon(QIcon("icon/inv.png"));
 }
 
 void OrdinaryCalcu::SetCalcuLayout()

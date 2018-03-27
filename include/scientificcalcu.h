@@ -32,8 +32,8 @@ private:
     QToolButton *logButton;
     QToolButton *expButton;
     QToolButton *modButton;
-    QToolButton *upButton;
 
+    QToolButton *eButton;
     QToolButton *piButton;
     QToolButton *factButton;
 

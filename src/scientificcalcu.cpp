@@ -2,9 +2,15 @@
 #include "ui_scientificcalcu.h"
 #include <QDebug>
 
+#if (defined (Q_OS_WIN32) || defined(Q_OS_WIN64))
 ScientificCalcu::ScientificCalcu()
-    : AbstractCalcu(nullptr, 24*3, 7*8, 20, 16),
+    : AbstractCalcu(nullptr, 57, 6*9+2, 29, 17),
        ui(new Ui::ScientificCalcu)
+#elif (defined(Q_OS_MAC))
+ScientificCalcu::ScientificCalcu()
+    : AbstractCalcu(nullptr, 20*3, 6*9, 30, 18),
+       ui(new Ui::ScientificCalcu)
+#endif
 {
     //9 blocks
     BuildButtons();
@@ -19,20 +25,19 @@ ScientificCalcu::~ScientificCalcu()
 void ScientificCalcu::BuildButtons()
 {
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
-    squareButton->setIcon(QIcon(":/new/icon/square.png"));
+    squareButton->setIcon(QIcon("icon/square.png"));
     powButton = createButton(tr("^"), SLOT(digitClicked()));
     sinButton = createButton(tr("sin"), SLOT(digitClicked()));
     cosButton = createButton(tr("cos"), SLOT(digitClicked()));
     tanButton = createButton(tr("tan"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"),SLOT(digitClicked()));
-    squareRootButton->setIcon(QIcon(":/new/icon/sroot.png"));
+    squareRootButton->setIcon(QIcon("icon/sroot.png"));
     tenExpButton = createButton(tr("10^x"), SLOT(digitClicked()));
-    tenExpButton->setIcon(QIcon(":/new/icon/tenpow.png"));
+    tenExpButton->setIcon(QIcon("icon/tenpow.png"));
     logButton = createButton(tr("log"), SLOT(digitClicked()));
     expButton = createButton(tr("exp"), SLOT(digitClicked()));
     modButton = createButton(tr("mod"), SLOT(digitClicked()));
-    upButton = createButton(tr("up"), SLOT(digitClicked()));
-    upButton->setIcon(QIcon(":/new/icon/arrow.png"));
+    eButton = createButton(tr("e"), SLOT(digitClicked()));
 
 
     piButton = createButton(tr("PI"), SLOT(digitClicked()));
@@ -59,7 +64,7 @@ void ScientificCalcu::SetCalcuLayout()
     mainLayout->addWidget(logButton, 2, 2);
     mainLayout->addWidget(expButton, 2, 3);
     mainLayout->addWidget(modButton, 2, 4);
-    mainLayout->addWidget(upButton, 3, 0);
+    mainLayout->addWidget(eButton, 3, 0);
     mainLayout->addWidget(clearEntryButton, 3, 1);
     mainLayout->addWidget(clearButton, 3, 2);
     mainLayout->addWidget(backspaceButton, 3, 3);

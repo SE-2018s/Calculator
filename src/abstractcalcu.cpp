@@ -47,7 +47,7 @@ void AbstractCalcu::BuildButtons()
     clearEntryButton = createButton(tr("CE"), SLOT(digitClicked()));
     clearButton = createButton(tr("C"), SLOT(digitClicked()));
     backspaceButton = createButton(tr("back"), SLOT(digitClicked()));
-    backspaceButton->setIcon(QIcon(":/new/icon/backspace.png"));
+    backspaceButton->setIcon(QIcon("icon/backspace.png"));
 }
 
 void AbstractCalcu::SetCalcuLayout()
@@ -150,6 +150,11 @@ void AbstractCalcu::digitClicked()
         list.getNum(M_E);
         list.getString("^");
     }
+    // e
+    else if(str == "e"){
+        value = " e";
+        list.getNum(M_E);
+    }
     // pi
     else if(str == "PI"){
         value = " pi";
@@ -184,11 +189,16 @@ void AbstractCalcu::digitClicked()
         value = " /";
         list.getString("/");
     }
+    else if(str == changeSignButton->text().toStdString()){
+        output = " - (" + output + " )";
+        list.entire_neg();
+    }
     // control
-    else if(str == "CE"){
+    else if(str == "CE" || str == "C"){
         list.list_.clear();
         output = "";
     }
+
     // if meets backspace, then delete chars on the right of the last ' '.
     else if(str == "back"){
         int pos =output.lastIndexOf(QChar(' '));
@@ -226,7 +236,8 @@ void AbstractCalcu::digitClicked()
         output = QString::fromStdString(finalResult);
     }
 
-    if(str != "CE" && str != "back" && str != "="){
+    if(str != "CE" && str != "C" && str != "back" && str != "=" &&
+            str != changeSignButton->text().toStdString()){
         if(output == "0")
             output = value;
         else{

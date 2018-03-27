@@ -7,16 +7,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     //ui->setupUi(this);
+    #if (defined (Q_OS_WIN32) || defined(Q_OS_WIN64))
+    this->setMinimumSize(360, 532);
+    #elif (defined(Q_OS_MAC))
     this->setFixedSize(4*5*6*3, 7*8*9);
+    #endif
 
     sci_calcu = new ScientificCalcu();
     ordi_calcu = new OrdinaryCalcu();
-    program_calcu = new ProgramCalcu();
+//    program_calcu = new ProgramCalcu();
 
     stacked_calcu = new QStackedWidget;
     stacked_calcu->addWidget(ordi_calcu);
     stacked_calcu->addWidget(sci_calcu);
-    stacked_calcu->addWidget(program_calcu);
+//    stacked_calcu->addWidget(program_calcu);
     setCentralWidget(stacked_calcu);
     CreateActions();
     CreateMenu();
@@ -37,9 +41,9 @@ void MainWindow::CreateActions()
     select_sci->setStatusTip(tr("Choose scientific calculator"));
     connect(select_sci, SIGNAL(triggered()), this, SLOT(SelectCalcu()));
 
-    select_program = new QAction(tr("Program"), this);
-    select_program->setStatusTip(tr("Choose programmer's calculator"));
-    connect(select_program, SIGNAL(triggered()), this, SLOT(SelectCalcu()));
+//    select_program = new QAction(tr("Program"), this);
+//    select_program->setStatusTip(tr("Choose programmer's calculator"));
+//    connect(select_program, SIGNAL(triggered()), this, SLOT(SelectCalcu()));
 
     about_act = new QAction(tr("About"), this);
     about_act->setStatusTip(tr("About this calculator"));
@@ -51,7 +55,7 @@ void MainWindow::CreateMenu()
     type_menu = menuBar()->addMenu(tr("&Type"));
     type_menu->addAction(select_ordi);
     type_menu->addAction(select_sci);
-    type_menu->addAction(select_program);
+//    type_menu->addAction(select_program);
     about_menu = menuBar()->addMenu(tr("&About"));
     about_menu->addAction(about_act);
 }
@@ -61,7 +65,7 @@ void MainWindow::CreateToolBar()
     type_toolbar = addToolBar(tr("&Type"));
     type_toolbar->addAction(select_ordi);
     type_toolbar->addAction(select_sci);
-    type_toolbar->addAction(select_program);
+//    type_toolbar->addAction(select_program);
     type_toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
     addToolBar(Qt::TopToolBarArea, type_toolbar);
 }
@@ -73,11 +77,11 @@ void MainWindow::SelectCalcu()
         stacked_calcu->setCurrentIndex(0);
     else if(type == QString("Scientific"))
         stacked_calcu->setCurrentIndex(1);
-    else stacked_calcu->setCurrentIndex(2);
+//    else stacked_calcu->setCurrentIndex(2);
 }
 
 void MainWindow::About()
 {
-    QMessageBox::about(this, tr("Mini Draw"),
+    QMessageBox::about(this, tr("About"),
                        tr("This is the calculator designed by USTC Invincible Team"));
 }
