@@ -10,10 +10,13 @@
 #include <iostream>
 #endif
 
-#define round(r) ( r > 0.0) ? (int)( r +0.5) : (int)( r -0.5)
+// #define round(r) ( r > 0.0) ? (int)( r +0.5) : (int)( r -0.5)
 
 namespace token_list {
 
+inline int round(double a) {
+    return (a > 0.0) ? (int)(a + 0.5) : (int)(a - 0.5);
+}
 
 template <typename T>
 using ptr = std::shared_ptr<T>;

@@ -140,7 +140,9 @@ void binop_node::calculate(std::stack<ptr<token_node>> &operands) {
       break;
   }
 #ifdef debug
-  std::cerr << "calculating bin op " << this->op << " with operand " << op1 << " " << op2 << " and result is " << p->value << std::endl;
+  std::cerr << "calculating bin op " << this->op << " with operand " << op1 << " (round is " << round(op1);
+  std::cerr << ") and " << op2 << " (round is " << round(op2);
+  std::cerr << ") and result is " << p->value << std::endl;
 #endif
   operands.push(p);
 }
@@ -195,7 +197,7 @@ void unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
       throw("syntax error!\n");
   }
 #ifdef debug
-  std::cerr << "calculating bin op " << this->op << " with operand " << op << " and result is " << p->value << std::endl ; 
+  std::cerr << "calculating uanry op " << this->op << " with operand " << op << " and result is " << p->value << std::endl ; 
 #endif
   operands.push(p);
 }
