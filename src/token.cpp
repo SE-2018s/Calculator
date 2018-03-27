@@ -254,19 +254,13 @@ void List::getString(std::string str){
 
 
 double List::calculate() {
-    try{
-        for (auto t : list_) {
-            t->processor(operators, operands);
-        }
-        if (operands.size() != 1) {
-            throw("syntax error!\n");
-        }
-        return dynamic_cast<float_node*>(operands.top().get())->value;
+    for (auto t : list_) {
+        t->processor(operators, operands);
     }
-    catch(const char* errmsg){
-        std::cerr << errmsg;
+    if (operands.size() != 1) {
+        throw("syntax error!\n");
     }
-
+    return dynamic_cast<float_node*>(operands.top().get())->value;
 }
 
 // List& operator<<(List& me, token_list::unary_op op) {

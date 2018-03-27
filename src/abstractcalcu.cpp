@@ -214,7 +214,13 @@ void AbstractCalcu::digitClicked()
     // '=': then we need to add the output to the list and calculate.
     else if(str == "="){
         list.getString("end");
-        double result = list.calculate();
+        double result;
+        try {
+            result = list.calculate();
+        }
+        catch(const char* errmsg){
+            output = QString::fromStdString( "Error");
+        }
         DEBUG("")
         list = token_list::List();
         numFlag = false;
@@ -233,7 +239,8 @@ void AbstractCalcu::digitClicked()
             if (posPoint == finalResult.length() - 1)
                 finalResult.pop_back();
         }
-        output = QString::fromStdString(finalResult);
+        if(output.lastIndexOf("Error: ") < 0)
+            output = QString::fromStdString(finalResult);
     }
 
     if(str != "CE" && str != "C" && str != "back" && str != "=" &&

@@ -8,7 +8,7 @@ ScientificCalcu::ScientificCalcu()
        ui(new Ui::ScientificCalcu)
 #elif (defined(Q_OS_MAC))
 ScientificCalcu::ScientificCalcu()
-    : AbstractCalcu(nullptr, 20*3, 6*9, 30, 18),
+    : AbstractCalcu(nullptr, 24*3, 7*8, 20, 16),
        ui(new Ui::ScientificCalcu)
 #endif
 {
