@@ -85,10 +85,10 @@ void rightparen_node::processor(std::stack<ptr<token_node>> &operators, std::sta
   std::cerr << "processing a )\n";
 #endif
   while (true) {
-    auto top = operators.top();
-    if (!top) {
+    if (operators.empty()) {
       throw("syntax error!\n");
     }
+    auto top = operators.top();
     if (dynamic_cast<unaryop_node*>(top.get()) || dynamic_cast<leftparen_node*>(top.get())) {
 #ifdef debug
       std::cerr << "top is unary or (\n";
