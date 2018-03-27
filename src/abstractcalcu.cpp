@@ -223,9 +223,8 @@ void AbstractCalcu::digitClicked()
         }
         DEBUG("")
         list = token_list::List();
-        numFlag = false;
         DEBUG("")
-        list.getNum(result);
+//        list.getNum(result);
         DEBUG(result)
         std::string finalResult = std::to_string(result);
         // delete the tailing '0' and '.'
@@ -239,8 +238,11 @@ void AbstractCalcu::digitClicked()
             if (posPoint == finalResult.length() - 1)
                 finalResult.pop_back();
         }
-        if(output.lastIndexOf("Error") < 0)
+        if(output.lastIndexOf("Error") < 0){
             output = QString::fromStdString(finalResult);
+            numStr = finalResult;
+            numFlag = true;
+        }
     }
 
     if(output.lastIndexOf("Error") == -1 && str != "CE" && str != "C" && str != "back" && str != "=" &&
