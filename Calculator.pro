@@ -48,8 +48,8 @@ FORMS += \
     ui/scientificcalcu.ui
 
 DISTFILES += \
-    icon/arrow.png \
-    icon/backspace.png \
+    icon/arrow.svg \
+    icon/backspace.svg \
     icon/inv.png \
     icon/square.png \
     icon/sroot.png

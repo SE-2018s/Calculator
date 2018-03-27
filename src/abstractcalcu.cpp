@@ -212,6 +212,8 @@ void AbstractCalcu::digitClicked()
     }
     // '=': then we need to add the output to the list and calculate.
     else if(str == "="){
+        if(list.list_.empty())
+            list.getNum(0);
         list.getString("end");
         double result;
         try {
