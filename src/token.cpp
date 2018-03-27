@@ -1,5 +1,6 @@
 #include "include/token.h"
 
+#define DEBUG(a) std::cout << __LINE__ << ": " << a << std::endl;
 
 // 设置两个栈，一个存操作数(operand)，一个存操作符(operator)
 // 每个token有processor方法，从输入中依次读到该token时调用
@@ -221,10 +222,8 @@ void List::getNum(double i){
 
 void List::getString(std::string str){
     if(str != "back"){
-        std::cout << __LINE__ << std::endl;
-        std::cout << str << std::endl;
         *this << str;
-        std::cout << __LINE__ << std::endl;
+        DEBUG(str);
     }
     else {
         this->list_.pop_back();
