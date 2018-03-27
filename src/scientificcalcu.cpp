@@ -2,9 +2,15 @@
 #include "ui_scientificcalcu.h"
 #include <QDebug>
 
+#if (defined (Q_OS_WIN32) || defined(Q_OS_WIN64))
 ScientificCalcu::ScientificCalcu()
-    : AbstractCalcu(nullptr, 24*3, 7*8, 20, 16),
+    : AbstractCalcu(nullptr, 57, 6*9+2, 29, 17),
        ui(new Ui::ScientificCalcu)
+#elif (defined(Q_OS_MAC))
+ScientificCalcu::ScientificCalcu()
+    : AbstractCalcu(nullptr, 20*3, 6*9, 30, 18),
+       ui(new Ui::ScientificCalcu)
+#endif
 {
     //9 blocks
     BuildButtons();

@@ -26,7 +26,7 @@ private:
     Ui::MainWindow *ui;
     ScientificCalcu* sci_calcu;
     OrdinaryCalcu* ordi_calcu;
-    ProgramCalcu* program_calcu;
+//    ProgramCalcu* program_calcu;
 
     QStackedWidget *stacked_calcu;
 
