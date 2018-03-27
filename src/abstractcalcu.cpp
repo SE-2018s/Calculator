@@ -1,5 +1,4 @@
 #include "include/abstractcalcu.h"
-//#include "include/token.h"
 #include <iostream>
 #include <string>
 #include <QDebug>
@@ -47,7 +46,7 @@ void AbstractCalcu::BuildButtons()
     clearEntryButton = createButton(tr("CE"), SLOT(digitClicked()));
     clearButton = createButton(tr("C"), SLOT(digitClicked()));
     backspaceButton = createButton(tr("back"), SLOT(digitClicked()));
-    backspaceButton->setIcon(QIcon("icon/backspace.png"));
+    backspaceButton->setIcon(QIcon(":/new/backspace"));
 }
 
 void AbstractCalcu::SetCalcuLayout()

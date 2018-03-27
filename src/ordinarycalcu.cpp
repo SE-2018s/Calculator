@@ -19,11 +19,11 @@ void OrdinaryCalcu::BuildButtons()
 {
     percentButton = createButton(tr("%"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"), SLOT(digitClicked()));
-    squareRootButton->setIcon(QIcon("icon/sroot.png"));
+    squareRootButton->setIcon(QIcon(":new/sroot"));
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
-    squareButton->setIcon(QIcon("icon/square.png"));
+    squareButton->setIcon(QIcon(":new/square"));
     invButton = createButton(tr("1/x"), SLOT(digitClicked()));
-    invButton->setIcon(QIcon("icon/inv.png"));
+    invButton->setIcon(QIcon(":new/inv"));
 }
 
 void OrdinaryCalcu::SetCalcuLayout()

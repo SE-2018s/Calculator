@@ -25,15 +25,15 @@ ScientificCalcu::~ScientificCalcu()
 void ScientificCalcu::BuildButtons()
 {
     squareButton = createButton(tr("x^2"), SLOT(digitClicked()));
-    squareButton->setIcon(QIcon("icon/square.png"));
+    squareButton->setIcon(QIcon(":new/square"));
     powButton = createButton(tr("^"), SLOT(digitClicked()));
     sinButton = createButton(tr("sin"), SLOT(digitClicked()));
     cosButton = createButton(tr("cos"), SLOT(digitClicked()));
     tanButton = createButton(tr("tan"), SLOT(digitClicked()));
     squareRootButton = createButton(tr("x^(1/2)"),SLOT(digitClicked()));
-    squareRootButton->setIcon(QIcon("icon/sroot.png"));
+    squareRootButton->setIcon(QIcon(":new/sroot"));
     tenExpButton = createButton(tr("10^x"), SLOT(digitClicked()));
-    tenExpButton->setIcon(QIcon("icon/tenpow.png"));
+    tenExpButton->setIcon(QIcon(":new/tenpow"));
     logButton = createButton(tr("log"), SLOT(digitClicked()));
     expButton = createButton(tr("exp"), SLOT(digitClicked()));
     modButton = createButton(tr("mod"), SLOT(digitClicked()));
