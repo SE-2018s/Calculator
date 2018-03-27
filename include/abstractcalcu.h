@@ -5,7 +5,8 @@
 #include <QtWidgets>
 #include <QToolButton>
 #include <QLineEdit>
-
+#include <string>
+#include "token.h"
 
 class AbstractCalcu : public QWidget
 {
@@ -46,6 +47,14 @@ protected:
     const int fontsize;
     const int iconsize;
     QString output;
+
+    // zevin's modification.
+public:
+    token_list::List list;
+    std::string test;
+    bool numFlag = false;
+    std::string dictStr = "0123456789.";
+    std::string numStr;
 };
 
 #endif // ABSTRACTCALCU_H
