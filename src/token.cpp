@@ -157,7 +157,7 @@ void binop_node::calculate(std::stack<ptr<token_node>> &operands) {
 }
 
 void unaryop_node::calculate(std::stack<ptr<token_node>> &operands) {
-  if (operands.empty()){// || operands.size() > 1) {
+  if (operands.empty()) {
     throw("syntax error!\n");
   }
   auto op = dynamic_cast<float_node*>(operands.top().get())->value;
