@@ -239,11 +239,11 @@ void AbstractCalcu::digitClicked()
             if (posPoint == finalResult.length() - 1)
                 finalResult.pop_back();
         }
-        if(output.lastIndexOf("Error: ") < 0)
+        if(output.lastIndexOf("Error") < 0)
             output = QString::fromStdString(finalResult);
     }
 
-    if(str != "CE" && str != "C" && str != "back" && str != "=" &&
+    if(output.lastIndexOf("Error") == -1 && str != "CE" && str != "C" && str != "back" && str != "=" &&
             str != changeSignButton->text().toStdString()){
         if(output == "0")
             output = value;
