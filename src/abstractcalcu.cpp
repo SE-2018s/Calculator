@@ -102,12 +102,18 @@ void AbstractCalcu::digitClicked()
         numFlag = false;
     }
 
-    // as for sin,cos,exp,tan,log we need '('
+    // as for sin,cos,exp,tan we need '('
     if(str == "sin" ||
             str == "cos" ||
             str == "tan" ||
             str == "ln" ){
         list.getString(str);
+        value = " " + value + " (";
+    }
+    // log->ln
+    else if(str == "log"){
+        list.getString("ln");
+        list.getString("(");
         value = " " + value + " (";
     }
     // ^
