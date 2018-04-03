@@ -49,13 +49,15 @@ bool token_node::should_pop(token_node* top, token_node* next) {
 #ifdef debug
         std::cerr << "next is bin op, top is not, if n/p then pop.\n";
 #endif
-        auto top_op1 = dynamic_cast<unaryop_node*>(top);
-        if (top_op1) {
+        // auto top_op1 = dynamic_cast<unaryop_node*>(top);
+        if (auto top_op1 = dynamic_cast<unaryop_node*>(top)) {
             if (top_op1->op == token_list::negative || top_op1->op == token_list::positive) {
               return true;
             } else {
               return false;
             }
+        } else if (auto top_op1 = dynamic_cast<leftparen_node*>(top)) {
+          return false;
         } else {
           throw("syntax error!\n");
         }
